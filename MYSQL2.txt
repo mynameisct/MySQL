@@ -1,0 +1,409 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.32 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use hrcopydatabase;
+Database changed
+mysql> create table employees(EMPLOYEE_ID int,FIRST_NAME varchar(50),LAST_NAME varchar(30),EMAIL varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table employees(EMPLOYEE_ID int,FIRST_NAME varchar(50),LAST_NAME varchar(30),EMAIL varchar(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DROP TABLE employees;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table employees(EMPLOYEE_ID int,FIRST_NAME varchar(50),LAST_NAME varchar(30),EMAIL varchar(20),PHONE_NUMBER varchar(10),HIRE_DATE date,JOB_ID varchar(20),SALARY double,COMMISSION_PCT int,MANAGER_ID int,DEPARTMENT_ID int);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DESC employees;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| EMPLOYEE_ID    | int         | YES  |     | NULL    |       |
+| FIRST_NAME     | varchar(50) | YES  |     | NULL    |       |
+| LAST_NAME      | varchar(30) | YES  |     | NULL    |       |
+| EMAIL          | varchar(20) | YES  |     | NULL    |       |
+| PHONE_NUMBER   | varchar(10) | YES  |     | NULL    |       |
+| HIRE_DATE      | date        | YES  |     | NULL    |       |
+| JOB_ID         | varchar(20) | YES  |     | NULL    |       |
+| SALARY         | double      | YES  |     | NULL    |       |
+| COMMISSION_PCT | int         | YES  |     | NULL    |       |
+| MANAGER_ID     | int         | YES  |     | NULL    |       |
+| DEPARTMENT_ID  | int         | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+11 rows in set (0.00 sec)
+
+mysql> insert into employees values(100,'Chaitanya','TRIBHUWAN',1188997766,'2022-06-17','QA Analyst',240000,0,001);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into employees values(100,'Chaitanya','TRIBHUWAN','1188997766','2022-06-17','QA Analyst',240000,0,001);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into employees values(100,'Chaitanya','TRIBHUWAN','ct@','9999223344','2022-06-17','QA Analyst',240000,0,211,001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employees values(100,'Saurabh','Bhagwat','sb@','9988223344','2022-02-18','REAL ESTATE',250000,1,212,002);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values(101,'Tejas','Kolhapure','tk@','9988223311','2022-01-20','Trainee',260000,2,213,003);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from employees;
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL | PHONE_NUMBER | HIRE_DATE  | JOB_ID      | SALARY | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+|         100 | Chaitanya  | TRIBHUWAN | ct@   | 9999223344   | 2022-06-17 | QA Analyst  | 240000 |              0 |        211 |             1 |
+|         100 | Saurabh    | Bhagwat   | sb@   | 9988223344   | 2022-02-18 | REAL ESTATE | 250000 |              1 |        212 |             2 |
+|         101 | Tejas      | Kolhapure | tk@   | 9988223311   | 2022-01-20 | Trainee     | 260000 |              2 |        213 |             3 |
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> update employees SET EMPLOYEE_ID = 101 WHERE FIRST_NAME = 'Saurabh';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employees;
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL | PHONE_NUMBER | HIRE_DATE  | JOB_ID      | SALARY | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+|         100 | Chaitanya  | TRIBHUWAN | ct@   | 9999223344   | 2022-06-17 | QA Analyst  | 240000 |              0 |        211 |             1 |
+|         101 | Saurabh    | Bhagwat   | sb@   | 9988223344   | 2022-02-18 | REAL ESTATE | 250000 |              1 |        212 |             2 |
+|         101 | Tejas      | Kolhapure | tk@   | 9988223311   | 2022-01-20 | Trainee     | 260000 |              2 |        213 |             3 |
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> insert into employees values(102,'Nikhil','Kulkarni','nk@','9988225555','2022-07-22','Developer',268000,3,214,004);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values(103,'Harshit','Upadhaye','hu@','4388225555','2022-11-25','Tester',275600,4,215,005);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values(104,'Anurag','Sangle','as@','4388225643','2022-04-11','MANAGER',325600,5,216,006);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values(105,'Ashutosh','Kulkarni','ak@','4388228881','2022-05-08','QA Tester',555600,6,217,007);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values(106,'Pushkar','Chillal','pc@','4388220000','2022-12-08','QA Lead',665600,6,218,008);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values(107,'Atharva','Sawant','as@','4388225445','2022-10-22','Counsellor',665623,7,219,009);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from employees;
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL | PHONE_NUMBER | HIRE_DATE  | JOB_ID      | SALARY | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+|         100 | Chaitanya  | TRIBHUWAN | ct@   | 9999223344   | 2022-06-17 | QA Analyst  | 240000 |              0 |        211 |             1 |
+|         101 | Saurabh    | Bhagwat   | sb@   | 9988223344   | 2022-02-18 | REAL ESTATE | 250000 |              1 |        212 |             2 |
+|         101 | Tejas      | Kolhapure | tk@   | 9988223311   | 2022-01-20 | Trainee     | 260000 |              2 |        213 |             3 |
+|         102 | Nikhil     | Kulkarni  | nk@   | 9988225555   | 2022-07-22 | Developer   | 268000 |              3 |        214 |             4 |
+|         103 | Harshit    | Upadhaye  | hu@   | 4388225555   | 2022-11-25 | Tester      | 275600 |              4 |        215 |             5 |
+|         104 | Anurag     | Sangle    | as@   | 4388225643   | 2022-04-11 | MANAGER     | 325600 |              5 |        216 |             6 |
+|         105 | Ashutosh   | Kulkarni  | ak@   | 4388228881   | 2022-05-08 | QA Tester   | 555600 |              6 |        217 |             7 |
+|         106 | Pushkar    | Chillal   | pc@   | 4388220000   | 2022-12-08 | QA Lead     | 665600 |              6 |        218 |             8 |
+|         107 | Atharva    | Sawant    | as@   | 4388225445   | 2022-10-22 | Counsellor  | 665623 |              7 |        219 |             9 |
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+9 rows in set (0.00 sec)
+
+mysql> insert into employees values(107,'Atharva','Sawant','as@','4388225445','2022-10-22','Counsellor',665623,7,219,010);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> DELETE TABLE employees WHERE DEPARTMENT_ID = = 010;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABLE employees WHERE DEPARTMENT_ID = = 010' at line 1
+mysql> DELETE TABLE employees WHERE DEPARTMENT_ID = = '010';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABLE employees WHERE DEPARTMENT_ID = = '010'' at line 1
+mysql> select * from employees;
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL | PHONE_NUMBER | HIRE_DATE  | JOB_ID      | SALARY | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+|         100 | Chaitanya  | TRIBHUWAN | ct@   | 9999223344   | 2022-06-17 | QA Analyst  | 240000 |              0 |        211 |             1 |
+|         101 | Saurabh    | Bhagwat   | sb@   | 9988223344   | 2022-02-18 | REAL ESTATE | 250000 |              1 |        212 |             2 |
+|         101 | Tejas      | Kolhapure | tk@   | 9988223311   | 2022-01-20 | Trainee     | 260000 |              2 |        213 |             3 |
+|         102 | Nikhil     | Kulkarni  | nk@   | 9988225555   | 2022-07-22 | Developer   | 268000 |              3 |        214 |             4 |
+|         103 | Harshit    | Upadhaye  | hu@   | 4388225555   | 2022-11-25 | Tester      | 275600 |              4 |        215 |             5 |
+|         104 | Anurag     | Sangle    | as@   | 4388225643   | 2022-04-11 | MANAGER     | 325600 |              5 |        216 |             6 |
+|         105 | Ashutosh   | Kulkarni  | ak@   | 4388228881   | 2022-05-08 | QA Tester   | 555600 |              6 |        217 |             7 |
+|         106 | Pushkar    | Chillal   | pc@   | 4388220000   | 2022-12-08 | QA Lead     | 665600 |              6 |        218 |             8 |
+|         107 | Atharva    | Sawant    | as@   | 4388225445   | 2022-10-22 | Counsellor  | 665623 |              7 |        219 |             9 |
+|         107 | Atharva    | Sawant    | as@   | 4388225445   | 2022-10-22 | Counsellor  | 665623 |              7 |        219 |            10 |
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> DELETE FROM employees WHERE DEPARTMENT_ID ='101';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from employees;
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL | PHONE_NUMBER | HIRE_DATE  | JOB_ID      | SALARY | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+|         100 | Chaitanya  | TRIBHUWAN | ct@   | 9999223344   | 2022-06-17 | QA Analyst  | 240000 |              0 |        211 |             1 |
+|         101 | Saurabh    | Bhagwat   | sb@   | 9988223344   | 2022-02-18 | REAL ESTATE | 250000 |              1 |        212 |             2 |
+|         101 | Tejas      | Kolhapure | tk@   | 9988223311   | 2022-01-20 | Trainee     | 260000 |              2 |        213 |             3 |
+|         102 | Nikhil     | Kulkarni  | nk@   | 9988225555   | 2022-07-22 | Developer   | 268000 |              3 |        214 |             4 |
+|         103 | Harshit    | Upadhaye  | hu@   | 4388225555   | 2022-11-25 | Tester      | 275600 |              4 |        215 |             5 |
+|         104 | Anurag     | Sangle    | as@   | 4388225643   | 2022-04-11 | MANAGER     | 325600 |              5 |        216 |             6 |
+|         105 | Ashutosh   | Kulkarni  | ak@   | 4388228881   | 2022-05-08 | QA Tester   | 555600 |              6 |        217 |             7 |
+|         106 | Pushkar    | Chillal   | pc@   | 4388220000   | 2022-12-08 | QA Lead     | 665600 |              6 |        218 |             8 |
+|         107 | Atharva    | Sawant    | as@   | 4388225445   | 2022-10-22 | Counsellor  | 665623 |              7 |        219 |             9 |
+|         107 | Atharva    | Sawant    | as@   | 4388225445   | 2022-10-22 | Counsellor  | 665623 |              7 |        219 |            10 |
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> DELETE TABLE employees WHERE DEPARTMENT_ID = = '10';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABLE employees WHERE DEPARTMENT_ID = = '10'' at line 1
+mysql> DELETE TABLE employees WHERE DEPARTMENT_ID = = '10';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABLE employees WHERE DEPARTMENT_ID = = '10'' at line 1
+mysql> DELETE TABLE employees WHERE DEPARTMENT_ID = ='10';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABLE employees WHERE DEPARTMENT_ID = ='10'' at line 1
+mysql> DELETE TABLE employees WHERE DEPARTMENT_ID='10';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABLE employees WHERE DEPARTMENT_ID='10'' at line 1
+mysql> DELETE FROM employees WHERE EMPLOYEE_ID ='107';
+Query OK, 2 rows affected (0.00 sec)
+
+mysql> select * from employees;
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL | PHONE_NUMBER | HIRE_DATE  | JOB_ID      | SALARY | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+|         100 | Chaitanya  | TRIBHUWAN | ct@   | 9999223344   | 2022-06-17 | QA Analyst  | 240000 |              0 |        211 |             1 |
+|         101 | Saurabh    | Bhagwat   | sb@   | 9988223344   | 2022-02-18 | REAL ESTATE | 250000 |              1 |        212 |             2 |
+|         101 | Tejas      | Kolhapure | tk@   | 9988223311   | 2022-01-20 | Trainee     | 260000 |              2 |        213 |             3 |
+|         102 | Nikhil     | Kulkarni  | nk@   | 9988225555   | 2022-07-22 | Developer   | 268000 |              3 |        214 |             4 |
+|         103 | Harshit    | Upadhaye  | hu@   | 4388225555   | 2022-11-25 | Tester      | 275600 |              4 |        215 |             5 |
+|         104 | Anurag     | Sangle    | as@   | 4388225643   | 2022-04-11 | MANAGER     | 325600 |              5 |        216 |             6 |
+|         105 | Ashutosh   | Kulkarni  | ak@   | 4388228881   | 2022-05-08 | QA Tester   | 555600 |              6 |        217 |             7 |
+|         106 | Pushkar    | Chillal   | pc@   | 4388220000   | 2022-12-08 | QA Lead     | 665600 |              6 |        218 |             8 |
++-------------+------------+-----------+-------+--------------+------------+-------------+--------+----------------+------------+---------------+
+8 rows in set (0.00 sec)
+
+mysql> insert into employees values(107,'Atharva','Sawant','as@','4388225445','2022-10-22','Counsellor',665623,7,219,009);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values(108,'Pratiksha','Ambikar','pa@','4388225466','2022-05-15','HR',1235623,8,220,010);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values(109,'Prayag','Gadling','pg@','9999999999','2022-02-22','CEO',1200000,9,221,011);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from employees;
++-------------+------------+-----------+-------+--------------+------------+-------------+---------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL | PHONE_NUMBER | HIRE_DATE  | JOB_ID      | SALARY  | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+-------+--------------+------------+-------------+---------+----------------+------------+---------------+
+|         100 | Chaitanya  | TRIBHUWAN | ct@   | 9999223344   | 2022-06-17 | QA Analyst  |  240000 |              0 |        211 |             1 |
+|         101 | Saurabh    | Bhagwat   | sb@   | 9988223344   | 2022-02-18 | REAL ESTATE |  250000 |              1 |        212 |             2 |
+|         101 | Tejas      | Kolhapure | tk@   | 9988223311   | 2022-01-20 | Trainee     |  260000 |              2 |        213 |             3 |
+|         102 | Nikhil     | Kulkarni  | nk@   | 9988225555   | 2022-07-22 | Developer   |  268000 |              3 |        214 |             4 |
+|         103 | Harshit    | Upadhaye  | hu@   | 4388225555   | 2022-11-25 | Tester      |  275600 |              4 |        215 |             5 |
+|         104 | Anurag     | Sangle    | as@   | 4388225643   | 2022-04-11 | MANAGER     |  325600 |              5 |        216 |             6 |
+|         105 | Ashutosh   | Kulkarni  | ak@   | 4388228881   | 2022-05-08 | QA Tester   |  555600 |              6 |        217 |             7 |
+|         106 | Pushkar    | Chillal   | pc@   | 4388220000   | 2022-12-08 | QA Lead     |  665600 |              6 |        218 |             8 |
+|         107 | Atharva    | Sawant    | as@   | 4388225445   | 2022-10-22 | Counsellor  |  665623 |              7 |        219 |             9 |
+|         108 | Pratiksha  | Ambikar   | pa@   | 4388225466   | 2022-05-15 | HR          | 1235623 |              8 |        220 |            10 |
+|         109 | Prayag     | Gadling   | pg@   | 9999999999   | 2022-02-22 | CEO         | 1200000 |              9 |        221 |            11 |
++-------------+------------+-----------+-------+--------------+------------+-------------+---------+----------------+------------+---------------+
+11 rows in set (0.00 sec)
+
+mysql> select count(JOB_ID) as number_of_jobs from employees;
++----------------+
+| number_of_jobs |
++----------------+
+|             11 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(SALARY) as Total_Salaries_Payable from employees;
++------------------------+
+| Total_Salaries_Payable |
++------------------------+
+|                5941646 |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> select min(SALARY) as Minimum_Salary from employees;
++----------------+
+| Minimum_Salary |
++----------------+
+|         240000 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select max(SALARY) as Maximum_Salary from employees WHERE JOB_ID ='HR';
++----------------+
+| Maximum_Salary |
++----------------+
+|        1235623 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(SALARY) as Average_Salary,count(EMPLOYEE_ID)as Number_of_Employees from employees where DEPARTMENT_ID =4;
++----------------+---------------------+
+| Average_Salary | Number_of_Employees |
++----------------+---------------------+
+|         268000 |                   1 |
++----------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> select max(SALARY) as Highest_Salary,min(SALARY)as Lowest_Salary,sum(SALARY) as Total_Salary,avg(SALARY)as Average_Salary from employees;
++----------------+---------------+--------------+-------------------+
+| Highest_Salary | Lowest_Salary | Total_Salary | Average_Salary    |
++----------------+---------------+--------------+-------------------+
+|        1235623 |        240000 |      5941646 | 540149.6363636364 |
++----------------+---------------+--------------+-------------------+
+1 row in set (0.00 sec)
+
+mysql> select JOB_ID,count(*) from employees group by JOB_ID;
++-------------+----------+
+| JOB_ID      | count(*) |
++-------------+----------+
+| QA Analyst  |        1 |
+| REAL ESTATE |        1 |
+| Trainee     |        1 |
+| Developer   |        1 |
+| Tester      |        1 |
+| MANAGER     |        1 |
+| QA Tester   |        1 |
+| QA Lead     |        1 |
+| Counsellor  |        1 |
+| HR          |        1 |
+| CEO         |        1 |
++-------------+----------+
+11 rows in set (0.00 sec)
+
+mysql> select max(SALARY)-min(SALARY)as DIFFERENCE IN SALARY from employees;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IN SALARY from employees' at line 1
+mysql> select max(SALARY),min(SALARY)as DIFFERENCE IN SALARY from employees;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IN SALARY from employees' at line 1
+mysql> select max(SALARY)-min(SALARY)as DIFFERENCE IN SALARY from employees;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IN SALARY from employees' at line 1
+mysql> select max(SALARY),min(SALARY) from employees;
++-------------+-------------+
+| max(SALARY) | min(SALARY) |
++-------------+-------------+
+|     1235623 |      240000 |
++-------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select max(SALARY)-min(SALARY)as Difference from employees;
++------------+
+| Difference |
++------------+
+|     995623 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employees;
++-------------+------------+-----------+-------+--------------+------------+-------------+---------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL | PHONE_NUMBER | HIRE_DATE  | JOB_ID      | SALARY  | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+-------+--------------+------------+-------------+---------+----------------+------------+---------------+
+|         100 | Chaitanya  | TRIBHUWAN | ct@   | 9999223344   | 2022-06-17 | QA Analyst  |  240000 |              0 |        211 |             1 |
+|         101 | Saurabh    | Bhagwat   | sb@   | 9988223344   | 2022-02-18 | REAL ESTATE |  250000 |              1 |        212 |             2 |
+|         101 | Tejas      | Kolhapure | tk@   | 9988223311   | 2022-01-20 | Trainee     |  260000 |              2 |        213 |             3 |
+|         102 | Nikhil     | Kulkarni  | nk@   | 9988225555   | 2022-07-22 | Developer   |  268000 |              3 |        214 |             4 |
+|         103 | Harshit    | Upadhaye  | hu@   | 4388225555   | 2022-11-25 | Tester      |  275600 |              4 |        215 |             5 |
+|         104 | Anurag     | Sangle    | as@   | 4388225643   | 2022-04-11 | MANAGER     |  325600 |              5 |        216 |             6 |
+|         105 | Ashutosh   | Kulkarni  | ak@   | 4388228881   | 2022-05-08 | QA Tester   |  555600 |              6 |        217 |             7 |
+|         106 | Pushkar    | Chillal   | pc@   | 4388220000   | 2022-12-08 | QA Lead     |  665600 |              6 |        218 |             8 |
+|         107 | Atharva    | Sawant    | as@   | 4388225445   | 2022-10-22 | Counsellor  |  665623 |              7 |        219 |             9 |
+|         108 | Pratiksha  | Ambikar   | pa@   | 4388225466   | 2022-05-15 | HR          | 1235623 |              8 |        220 |            10 |
+|         109 | Prayag     | Gadling   | pg@   | 9999999999   | 2022-02-22 | CEO         | 1200000 |              9 |        221 |            11 |
++-------------+------------+-----------+-------+--------------+------------+-------------+---------+----------------+------------+---------------+
+11 rows in set (0.00 sec)
+
+mysql> select MANAGER_ID,min(SALARY) from employees where MANAGER_ID is not null group by MANAGER_ID order by min(SALARY)DESC;
++------------+-------------+
+| MANAGER_ID | min(SALARY) |
++------------+-------------+
+|        220 |     1235623 |
+|        221 |     1200000 |
+|        219 |      665623 |
+|        218 |      665600 |
+|        217 |      555600 |
+|        216 |      325600 |
+|        215 |      275600 |
+|        214 |      268000 |
+|        213 |      260000 |
+|        212 |      250000 |
+|        211 |      240000 |
++------------+-------------+
+11 rows in set (0.00 sec)
+
+mysql> select DEPARTMENT_ID,sum(SALARY) as Total from employees group by DEPARTMENT_ID;
++---------------+---------+
+| DEPARTMENT_ID | Total   |
++---------------+---------+
+|             1 |  240000 |
+|             2 |  250000 |
+|             3 |  260000 |
+|             4 |  268000 |
+|             5 |  275600 |
+|             6 |  325600 |
+|             7 |  555600 |
+|             8 |  665600 |
+|             9 |  665623 |
+|            10 | 1235623 |
+|            11 | 1200000 |
++---------------+---------+
+11 rows in set (0.00 sec)
+
+mysql> select JOB_ID,avg(SALARY) from employees where JOB_ID<>'CEO' group by JOB_ID;
++-------------+-------------+
+| JOB_ID      | avg(SALARY) |
++-------------+-------------+
+| QA Analyst  |      240000 |
+| REAL ESTATE |      250000 |
+| Trainee     |      260000 |
+| Developer   |      268000 |
+| Tester      |      275600 |
+| MANAGER     |      325600 |
+| QA Tester   |      555600 |
+| QA Lead     |      665600 |
+| Counsellor  |      665623 |
+| HR          |     1235623 |
++-------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> select JOB_ID,sum(SALARY),min(SALARY),max(SALARY),avg(SALARY) from employees where DEPARTMENT_ID = 4 group  by JOB_ID;
++-----------+-------------+-------------+-------------+-------------+
+| JOB_ID    | sum(SALARY) | min(SALARY) | max(SALARY) | avg(SALARY) |
++-----------+-------------+-------------+-------------+-------------+
+| Developer |      268000 |      268000 |      268000 |      268000 |
++-----------+-------------+-------------+-------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> select JOB_ID,max(SALARY) from employees group by JOB_ID having max(SALARY)>=40000;
++-------------+-------------+
+| JOB_ID      | max(SALARY) |
++-------------+-------------+
+| QA Analyst  |      240000 |
+| REAL ESTATE |      250000 |
+| Trainee     |      260000 |
+| Developer   |      268000 |
+| Tester      |      275600 |
+| MANAGER     |      325600 |
+| QA Tester   |      555600 |
+| QA Lead     |      665600 |
+| Counsellor  |      665623 |
+| HR          |     1235623 |
+| CEO         |     1200000 |
++-------------+-------------+
+11 rows in set (0.00 sec)
+
+mysql> select DEPARTMENT_ID,avg(SALARY),count(*) from employees GROUP BY DEPARTMENT_ID HAVING count(*)>5;
+Empty set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+
+

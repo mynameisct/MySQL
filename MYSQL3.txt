@@ -1,0 +1,150 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.32 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| hrcopydatabase     |
+| hrcopydatabse      |
+| hrdatabase         |
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+6 rows in set (0.02 sec)
+
+mysql> show tables;
+ERROR 1046 (3D000): No database selected
+mysql> use hrcopydatabase
+Database changed
+mysql> show tables;
++--------------------------+
+| Tables_in_hrcopydatabase |
++--------------------------+
+| employees                |
++--------------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employees;
++-------------+------------+-----------+-------+--------------+------------+-------------+---------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL | PHONE_NUMBER | HIRE_DATE  | JOB_ID      | SALARY  | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+-------+--------------+------------+-------------+---------+----------------+------------+---------------+
+|         100 | Chaitanya  | TRIBHUWAN | ct@   | 9999223344   | 2022-06-17 | QA Analyst  |  240000 |              0 |        211 |             1 |
+|         101 | Saurabh    | Bhagwat   | sb@   | 9988223344   | 2022-02-18 | REAL ESTATE |  250000 |              1 |        212 |             2 |
+|         101 | Tejas      | Kolhapure | tk@   | 9988223311   | 2022-01-20 | Trainee     |  260000 |              2 |        213 |             3 |
+|         102 | Nikhil     | Kulkarni  | nk@   | 9988225555   | 2022-07-22 | Developer   |  268000 |              3 |        214 |             4 |
+|         103 | Harshit    | Upadhaye  | hu@   | 4388225555   | 2022-11-25 | Tester      |  275600 |              4 |        215 |             5 |
+|         104 | Anurag     | Sangle    | as@   | 4388225643   | 2022-04-11 | MANAGER     |  325600 |              5 |        216 |             6 |
+|         105 | Ashutosh   | Kulkarni  | ak@   | 4388228881   | 2022-05-08 | QA Tester   |  555600 |              6 |        217 |             7 |
+|         106 | Pushkar    | Chillal   | pc@   | 4388220000   | 2022-12-08 | QA Lead     |  665600 |              6 |        218 |             8 |
+|         107 | Atharva    | Sawant    | as@   | 4388225445   | 2022-10-22 | Counsellor  |  665623 |              7 |        219 |             9 |
+|         108 | Pratiksha  | Ambikar   | pa@   | 4388225466   | 2022-05-15 | HR          | 1235623 |              8 |        220 |            10 |
+|         109 | Prayag     | Gadling   | pg@   | 9999999999   | 2022-02-22 | CEO         | 1200000 |              9 |        221 |            11 |
++-------------+------------+-----------+-------+--------------+------------+-------------+---------+----------------+------------+---------------+
+11 rows in set (0.00 sec)
+
+mysql> select concat(FIRST_NAME,LAST_NAME)as name,salary from employees where SALARY not between 10000 and 20000;
++--------------------+---------+
+| name               | salary  |
++--------------------+---------+
+| ChaitanyaTRIBHUWAN |  240000 |
+| SaurabhBhagwat     |  250000 |
+| TejasKolhapure     |  260000 |
+| NikhilKulkarni     |  268000 |
+| HarshitUpadhaye    |  275600 |
+| AnuragSangle       |  325600 |
+| AshutoshKulkarni   |  555600 |
+| PushkarChillal     |  665600 |
+| AtharvaSawant      |  665623 |
+| PratikshaAmbikar   | 1235623 |
+| PrayagGadling      | 1200000 |
++--------------------+---------+
+11 rows in set (0.00 sec)
+
+mysql> select concat(FIRST_NAME,LAST_NAME) as name,deptid from employees WHERE DEPARTMENT_ID in(5) order by DEPARTMENT_ID;
+ERROR 1054 (42S22): Unknown column 'deptid' in 'field list'
+mysql> select concat(FIRST_NAME,LAST_NAME) as name,DEPARTMENT_ID from employees WHERE DEPARTMENT_ID in(5) order by DEPARTMENT_ID;
++-----------------+---------------+
+| name            | DEPARTMENT_ID |
++-----------------+---------------+
+| HarshitUpadhaye |             5 |
++-----------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> select concat(FIRST_NAME,LAST_NAME) as name,salary from employees WHERE SALARY NOT BETWEEN 10000 and 500000 and DEPARTMENT_ID in(4,8);
++----------------+--------+
+| name           | salary |
++----------------+--------+
+| PushkarChillal | 665600 |
++----------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select concat(FIRST_NAME,LAST_NAME) as name,HIRE_ID from employees WHERE HIRE_DATE='2022-10-22';
+ERROR 1054 (42S22): Unknown column 'HIRE_ID' in 'field list'
+mysql> select concat(FIRST_NAME,LAST_NAME) as name,HIRE_DATE from employees WHERE HIRE_DATE='2022-10-22';
++---------------+------------+
+| name          | HIRE_DATE  |
++---------------+------------+
+| AtharvaSawant | 2022-10-22 |
++---------------+------------+
+1 row in set (0.00 sec)
+
+mysql> select FIRST_NAME from employees where FIRST_NAME like '%b%c';
+Empty set (0.01 sec)
+
+mysql> select LAST_NAME from employees where length(LAST_NAM)=6;
+ERROR 1054 (42S22): Unknown column 'LAST_NAM' in 'where clause'
+mysql> select LAST_NAME from employees where length(LAST_NAME)=6;
++-----------+
+| LAST_NAME |
++-----------+
+| Sangle    |
+| Sawant    |
++-----------+
+2 rows in set (0.00 sec)
+
+mysql> select LAST_NAME from employees where LAST_NAME like '--e%';
+Empty set (0.00 sec)
+
+mysql> select concat(FIRST_NAME,LAST_NAME) as name,salary,SALARY*15/100 as PF from employees;
++--------------------+---------+-----------+
+| name               | salary  | PF        |
++--------------------+---------+-----------+
+| ChaitanyaTRIBHUWAN |  240000 |     36000 |
+| SaurabhBhagwat     |  250000 |     37500 |
+| TejasKolhapure     |  260000 |     39000 |
+| NikhilKulkarni     |  268000 |     40200 |
+| HarshitUpadhaye    |  275600 |     41340 |
+| AnuragSangle       |  325600 |     48840 |
+| AshutoshKulkarni   |  555600 |     83340 |
+| PushkarChillal     |  665600 |     99840 |
+| AtharvaSawant      |  665623 |  99843.45 |
+| PratikshaAmbikar   | 1235623 | 185343.45 |
+| PrayagGadling      | 1200000 |    180000 |
++--------------------+---------+-----------+
+11 rows in set (0.00 sec)
+
+mysql> select * from employees where LAST_NAME in('Chillal','Kulkarni','TRIBHUWAN','Sangle');
++-------------+------------+-----------+-------+--------------+------------+------------+--------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL | PHONE_NUMBER | HIRE_DATE  | JOB_ID     | SALARY | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+-------+--------------+------------+------------+--------+----------------+------------+---------------+
+|         100 | Chaitanya  | TRIBHUWAN | ct@   | 9999223344   | 2022-06-17 | QA Analyst | 240000 |              0 |        211 |             1 |
+|         102 | Nikhil     | Kulkarni  | nk@   | 9988225555   | 2022-07-22 | Developer  | 268000 |              3 |        214 |             4 |
+|         104 | Anurag     | Sangle    | as@   | 4388225643   | 2022-04-11 | MANAGER    | 325600 |              5 |        216 |             6 |
+|         105 | Ashutosh   | Kulkarni  | ak@   | 4388228881   | 2022-05-08 | QA Tester  | 555600 |              6 |        217 |             7 |
+|         106 | Pushkar    | Chillal   | pc@   | 4388220000   | 2022-12-08 | QA Lead    | 665600 |              6 |        218 |             8 |
++-------------+------------+-----------+-------+--------------+------------+------------+--------+----------------+------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql>
