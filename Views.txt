@@ -1,0 +1,201 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 37
+Server version: 8.0.32 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| hrcopydatabase     |
+| hrdatabase         |
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> USE hrcopydatabase;
+Database changed
+mysql> SHOW TABLES;
++--------------------------+
+| Tables_in_hrcopydatabase |
++--------------------------+
+| department               |
+| employees                |
+| salesman                 |
+| salesown1_view           |
+| salesown2_view           |
++--------------------------+
+5 rows in set (0.00 sec)
+
+mysql> DESCRIBE department;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| DEPARTMENT_ID   | int         | YES  |     | NULL    |       |
+| DEPARTMENT_NAME | varchar(50) | YES  |     | NULL    |       |
+| MANAGER_ID      | int         | YES  |     | NULL    |       |
+| LOCATION_ID     | int         | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM department;
++---------------+----------------------+------------+-------------+
+| DEPARTMENT_ID | DEPARTMENT_NAME      | MANAGER_ID | LOCATION_ID |
++---------------+----------------------+------------+-------------+
+|           101 | Administration       |       1000 |      411008 |
+|           102 | Marketing            |       2000 |      411007 |
+|           103 | Purchasing           |       3000 |      411006 |
+|           104 | Human Resource       |       4000 |      411005 |
+|           105 | Shipping             |       5000 |      411004 |
+|           106 | IT                   |       6000 |      411003 |
+|           107 | Public Relations     |       7000 |      411002 |
+|           108 | Sales                |       8000 |      411001 |
+|           109 | Executive            |       9000 |      411000 |
+|           110 | Finance              |      10000 |      411009 |
+|           111 | Accounting           |      11000 |      431001 |
+|           112 | Treasury             |      12000 |      431002 |
+|           113 | Corporate Tax        |      13000 |      431003 |
+|           114 | Control and credit   |      14000 |      431004 |
+|           115 | Shareholder services |      15000 |      431005 |
+|           116 | Benefitss            |      16000 |      431006 |
+|           117 | Manufacturing        |      17000 |      431007 |
+|           118 | Construction         |      18000 |      431008 |
+|           119 | Contracting          |      19000 |      431009 |
+|           120 | Operations           |      20000 |      431010 |
+|           120 | IT Support           |      20000 |      431010 |
+|           121 | NOC                  |      21000 |      431011 |
+|           122 | IT helpdesk          |      22000 |      431012 |
+|           123 | Government Sales     |      23000 |      431013 |
+|           124 | Retails Sales        |      24000 |      431014 |
+|           125 | Recruiting           |      25000 |      431015 |
+|           126 | Payroll              |      26000 |      431016 |
++---------------+----------------------+------------+-------------+
+27 rows in set (0.00 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| hrcopydatabase     |
+| hrdatabase         |
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> SHOW TABLES;
++--------------------------+
+| Tables_in_hrcopydatabase |
++--------------------------+
+| department               |
+| employees                |
+| salesman                 |
+| salesown1_view           |
+| salesown2_view           |
++--------------------------+
+5 rows in set (0.00 sec)
+
+mysql> DESCRIBE salesman;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| salesman_id | int         | NO   | PRI | NULL    |       |
+| name        | varchar(50) | YES  |     | NULL    |       |
+| city        | varchar(20) | YES  |     | NULL    |       |
+| commision   | float       | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO salesman values(201,'Akshit','Mumbai',4.5);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> UPDATE salesman WHERE salesman_id=201 SET name as James;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE salesman_id=201 SET name as James' at line 1
+mysql> UPDATE salesman WHERE salesman_id=201 SET name as 'James';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE salesman_id=201 SET name as 'James'' at line 1
+mysql> UPDATE salesman SET salesman_id=5001,name='James Hoog',city='New York,commission=0.15 WHERE salesman_id=201;
+    '> UPDATE salesman SET salesman_id=5001,name='James Hoog',city='New York,commission=0.15 WHERE(salesman_id=201);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'James Hoog',city='New York,commission=0.15 WHERE(salesman_id=201)' at line 2
+mysql> UPDATE salesman SET salesman_id=5001,name='James Hoog',city='New York',commission=0.15 WHERE(salesman_id=201);
+ERROR 1054 (42S22): Unknown column 'commission' in 'field list'
+mysql> UPDATE salesman SET salesman_id=5001,name='James Hoog',city='New York',commision=0.15 WHERE(salesman_id=201);
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM salesman;
++-------------+------------+----------+-----------+
+| salesman_id | name       | city     | commision |
++-------------+------------+----------+-----------+
+|        5001 | James Hoog | New York |      0.15 |
++-------------+------------+----------+-----------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO salesman values(5002,'Nail Knite','Paris',0.13);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO salesman values(5005,'Pit Alex','London',0.11);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO salesman values(5006,'Mc Lyon','Paris',0.14);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO salesman values(5007,'Paul Adam','Rome',0.13);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO salesman values(5003,'Lauson Hen','San Jose',0.12);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> CREATE VIEW salesown1_view as select salesman_id,name,city from salesman;
+ERROR 1050 (42S01): Table 'salesown1_view' already exists
+mysql> CREATE VIEW salesown11_view as select salesman_id,name,city from salesman;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT * FROM salesown11;
+ERROR 1146 (42S02): Table 'hrcopydatabase.salesown11' doesn't exist
+mysql> SELECT * FROM salesown11_view;
++-------------+------------+----------+
+| salesman_id | name       | city     |
++-------------+------------+----------+
+|        5001 | James Hoog | New York |
+|        5002 | Nail Knite | Paris    |
+|        5003 | Lauson Hen | San Jose |
+|        5005 | Pit Alex   | London   |
+|        5006 | Mc Lyon    | Paris    |
+|        5007 | Paul Adam  | Rome     |
++-------------+------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> CREATE VIEW salesown11_view as select name from salesman WHERE city='New York';
+ERROR 1050 (42S01): Table 'salesown11_view' already exists
+mysql> CREATE VIEW salesown22_view as select name from salesman WHERE city='New York';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT * FROM salesown22_view;
++------------+
+| name       |
++------------+
+| James Hoog |
++------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE VIEW salesown33_view as select name from salesman WHERE salesman_id=5003;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT * FROM salesown33_view;
++------------+
+| name       |
++------------+
+| Lauson Hen |
++------------+
+1 row in set (0.00 sec)
