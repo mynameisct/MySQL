@@ -1,0 +1,397 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 34
+Server version: 8.0.32 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| hrcopydatabase     |
+| hrdatabase         |
+| information_schema |
+| mysql              |
+| performance_schema |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> USE hrcopydatabase;
+Database changed
+mysql> SHOW TABLES;
++--------------------------+
+| Tables_in_hrcopydatabase |
++--------------------------+
+| employees                |
++--------------------------+
+1 row in set (0.00 sec)
+
+mysql> DESCRIBE employees;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| EMPLOYEE_ID    | int         | YES  |     | NULL    |       |
+| FIRST_NAME     | varchar(50) | YES  |     | NULL    |       |
+| LAST_NAME      | varchar(50) | YES  |     | NULL    |       |
+| EMAIL          | varchar(20) | YES  |     | NULL    |       |
+| PHONE_NUMBER   | varchar(10) | YES  |     | NULL    |       |
+| HIRE_DATE      | date        | YES  |     | NULL    |       |
+| JOB_ID         | varchar(20) | YES  |     | NULL    |       |
+| SALARY         | double      | YES  |     | NULL    |       |
+| COMMISSION_PCT | int         | YES  |     | NULL    |       |
+| MANAGER_ID     | int         | YES  |     | NULL    |       |
+| DEPARTMENT_ID  | int         | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees;
++-------------+------------+---------------+----------------+--------------+------------+------------------+-----------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME     | EMAIL          | PHONE_NUMBER | HIRE_DATE  | JOB_ID           | SALARY    | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+---------------+----------------+--------------+------------+------------------+-----------+----------------+------------+---------------+
+|         100 | Saurabh    | Bhagwat       | sb@share.com   | 9923026232   | 2022-05-20 | Trader           |  78000.98 |            345 |         12 |            67 |
+|         101 | Nikhil     | Kulkarni      | nk@gmail.com   | 9545429210   | 2020-12-12 | Developer        |  79000.98 |            346 |         13 |            68 |
+|         102 | Tejas      | Kolhapure     | tk@gmail.com   | 9765994343   | 2025-12-04 | HR               |  80000.98 |            347 |         14 |            69 |
+|         103 | Pushkar    | Chillal       | pc@gmail.com   | 7666928145   | 2023-07-01 | Support          |  81000.98 |            348 |         15 |            70 |
+|         104 | Shubham    | Tagunde       | st@gmail.com   | 9699629228   | 2025-12-25 | Python Developer | 822000.98 |            349 |         16 |            71 |
+|         105 | Anurag     | Sangle        | as@gmail.com   | 9881968888   | 2026-04-12 | Data Scientist   | 832000.98 |            350 |         17 |            72 |
+|         106 | Ninad      | Baste         | nb@gmail.com   | 9881875915   | 2016-09-26 | Counsellor       | 900000.99 |            351 |         18 |            73 |
+|         107 | Akshay     | Gaikwad       | ag@hhsbc.com   | 9226610330   | 2012-01-07 | Git Lead         | 910000.99 |            352 |         19 |            73 |
+|         108 | Atharva    | Sawant        | as@home.com    | 9075403130   | 2031-12-20 | HR               |    920000 |            353 |         20 |            74 |
+|         109 | Yogesh     | Pareek        | yp@gmail.com   | 8928184205   | 2023-06-12 | QA               |    930000 |            354 |         21 |            75 |
+|         110 | Rohit      | Gaikwad       | rg@gmail.com   | 9765604750   | 2024-05-14 | Data Analyst     |    950000 |            355 |         22 |            76 |
+|         111 | TalentPro  | TechSolutions | tpts@gmail.com | 9373211521   | 2023-06-05 | Recruiter        |    960000 |            356 |         23 |            77 |
+|         112 | Rushikesh  | Lokhande      | rl@gmail.com   | 7620516767   | 2023-03-20 | Police           |    980000 |            357 |         24 |            78 |
+|         113 | Shubham    | Tribhuwan     | st@gmail.com   | 9673397462   | 2018-03-22 | Java Developer   |    990000 |            358 |         25 |            79 |
+|         114 | Samarth    | Bhosale       | sb@gmail.com   | 8796304669   | 2023-11-23 | Web Intern       |    995000 |            359 |         26 |            80 |
++-------------+------------+---------------+----------------+--------------+------------+------------------+-----------+----------------+------------+---------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(JOB_ID) as Current Job Openings from employees;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Job Openings from employees' at line 1
+mysql> SELECT COUNT(JOB_ID) as Current_Job_Openings from employees;
++----------------------+
+| Current_Job_Openings |
++----------------------+
+|                   15 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT SUM(SALARY) as Total_Salaries_Payable from employees;
++------------------------+
+| Total_Salaries_Payable |
++------------------------+
+|            10507007.86 |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(SALARY) as Minimum_Salary from employees;
++----------------+
+| Minimum_Salary |
++----------------+
+|       78000.98 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(SALARY) as Maximum_Salary from employees where JOB_ID='HR';
++----------------+
+| Maximum_Salary |
++----------------+
+|         920000 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(SALARY) as Average_Salary,COUNT(EMPLOYEE_ID) as Number_of_Employees from employees WHERE DEPARTMENT_ID = 78;
++----------------+---------------------+
+| Average_Salary | Number_of_Employees |
++----------------+---------------------+
+|         980000 |                   1 |
++----------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(SALARY) as Highest_Salary,MIN(SALARY) as Minimum_Salary,SUM(SALARY) as Total_Payable,AVG(SALARY) as Average_Salary from employees;
++----------------+----------------+---------------+-------------------+
+| Highest_Salary | Minimum_Salary | Total_Payable | Average_Salary    |
++----------------+----------------+---------------+-------------------+
+|         995000 |       78000.98 |   10507007.86 | 700467.1906666666 |
++----------------+----------------+---------------+-------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT JOB_ID,COUNT(*) from employees GROUP BY JOB_ID;
++------------------+----------+
+| JOB_ID           | COUNT(*) |
++------------------+----------+
+| Trader           |        1 |
+| Developer        |        1 |
+| HR               |        2 |
+| Support          |        1 |
+| Python Developer |        1 |
+| Data Scientist   |        1 |
+| Counsellor       |        1 |
+| Git Lead         |        1 |
+| QA               |        1 |
+| Data Analyst     |        1 |
+| Recruiter        |        1 |
+| Police           |        1 |
+| Java Developer   |        1 |
+| Web Intern       |        1 |
++------------------+----------+
+14 rows in set (0.00 sec)
+
+mysql> SELECT MAX(SALARY)-MIN(SALARY) as Difference from employees;
++------------+
+| Difference |
++------------+
+|  916999.02 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MANAGER_ID,MIN(SALARY) from employees WHERE MANAGER_ID IS NOT NULL GROUP BY MANAGER_ID ORDER BY MIN(SALARY)DESC;
++------------+-------------+
+| MANAGER_ID | MIN(SALARY) |
++------------+-------------+
+|         26 |      995000 |
+|         25 |      990000 |
+|         24 |      980000 |
+|         23 |      960000 |
+|         22 |      950000 |
+|         21 |      930000 |
+|         20 |      920000 |
+|         19 |   910000.99 |
+|         18 |   900000.99 |
+|         17 |   832000.98 |
+|         16 |   822000.98 |
+|         15 |    81000.98 |
+|         14 |    80000.98 |
+|         13 |    79000.98 |
+|         12 |    78000.98 |
++------------+-------------+
+15 rows in set (0.00 sec)
+
+mysql>  SELECT DEPARTMENT_ID,SUM(SALARY) as Total from employees GROUP BY DEPARTMENT_ID;
++---------------+------------+
+| DEPARTMENT_ID | Total      |
++---------------+------------+
+|            67 |   78000.98 |
+|            68 |   79000.98 |
+|            69 |   80000.98 |
+|            70 |   81000.98 |
+|            71 |  822000.98 |
+|            72 |  832000.98 |
+|            73 | 1810001.98 |
+|            74 |     920000 |
+|            75 |     930000 |
+|            76 |     950000 |
+|            77 |     960000 |
+|            78 |     980000 |
+|            79 |     990000 |
+|            80 |     995000 |
++---------------+------------+
+14 rows in set (0.00 sec)
+
+mysql> SELECT JOB_ID,AVG(SALARY) from employees WHERE JOB_ID<>'HR' GROUP BY JOB_ID;
++------------------+-------------+
+| JOB_ID           | AVG(SALARY) |
++------------------+-------------+
+| Trader           |    78000.98 |
+| Developer        |    79000.98 |
+| Support          |    81000.98 |
+| Python Developer |   822000.98 |
+| Data Scientist   |   832000.98 |
+| Counsellor       |   900000.99 |
+| Git Lead         |   910000.99 |
+| QA               |      930000 |
+| Data Analyst     |      950000 |
+| Recruiter        |      960000 |
+| Police           |      980000 |
+| Java Developer   |      990000 |
+| Web Intern       |      995000 |
++------------------+-------------+
+13 rows in set (0.00 sec)
+
+mysql> SELECT JOB_ID,SUM(SALARY),MIN(SALARY),AVG(SALARY) from employees WHERE DEPARTMENT_ID=78 GROUP BY JOB_ID;
++--------+-------------+-------------+-------------+
+| JOB_ID | SUM(SALARY) | MIN(SALARY) | AVG(SALARY) |
++--------+-------------+-------------+-------------+
+| Police |      980000 |      980000 |      980000 |
++--------+-------------+-------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT JOB_ID,MAX(SALARY) from employees GROUP BY JOB_ID HAVING MAX(SALARY)>=920000;
++----------------+-------------+
+| JOB_ID         | MAX(SALARY) |
++----------------+-------------+
+| HR             |      920000 |
+| QA             |      930000 |
+| Data Analyst   |      950000 |
+| Recruiter      |      960000 |
+| Police         |      980000 |
+| Java Developer |      990000 |
+| Web Intern     |      995000 |
++----------------+-------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT(FIRST_NAME,LAST_NAME) as Name,SALARY from employees WHERE SALARY NOT BETWEEN 900000 AND 950000;
++------------------------+-----------+
+| Name                   | SALARY    |
++------------------------+-----------+
+| SaurabhBhagwat         |  78000.98 |
+| NikhilKulkarni         |  79000.98 |
+| TejasKolhapure         |  80000.98 |
+| PushkarChillal         |  81000.98 |
+| ShubhamTagunde         | 822000.98 |
+| AnuragSangle           | 832000.98 |
+| TalentProTechSolutions |    960000 |
+| RushikeshLokhande      |    980000 |
+| ShubhamTribhuwan       |    990000 |
+| SamarthBhosale         |    995000 |
++------------------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT(FIRST_NAME,LAST_NAME) as Name,DEPARTMENT_ID from employees WHERE DEPARTMENT_ID IN(60,90) ORDER BY DEPARTMENT_ID;
+Empty set (0.00 sec)
+
+mysql> SELECT CONCAT(FIRST_NAME,LAST_NAME) as Name,DEPARTMENT_ID from employees WHERE DEPARTMENT_ID IN(60,70) ORDER BY DEPARTMENT_ID;
++----------------+---------------+
+| Name           | DEPARTMENT_ID |
++----------------+---------------+
+| PushkarChillal |            70 |
++----------------+---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CONCAT(FIRST_NAME,LAST_NAME) as Name,SALARY from employees WHERE SALARY NOT BETWEEN 70000 AND 80000 AND DEPARTMENT_ID IN(70,75);
++----------------+----------+
+| Name           | SALARY   |
++----------------+----------+
+| PushkarChillal | 81000.98 |
+| YogeshPareek   |   930000 |
++----------------+----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT(FIRST_NAME,LAST_NAME) as Name,SALARY from employees WHERE SALARY>=70000 AND SALARY<=80000 AND (DEPARTMENT_ID =70 OR DEPARTMENT_ID = 75;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> SELECT CONCAT(FIRST_NAME,LAST_NAME) as Name,SALARY from employees WHERE SALARY>=70000 AND SALARY<=80000 AND (DEPARTMENT_ID = 70 OR DEPARTMENT_ID = 75);
+Empty set (0.00 sec)
+
+mysql> SELECT CONCAT(FIRST_NAME,LAST_NAME) as Name,SALARY from employees WHERE SALARY>=70000 AND SALARY<=80000 AND (DEPARTMENT_ID = 70 OR DEPARTMENT_ID = 75);
+Empty set (0.00 sec)
+
+mysql> SELECT CONCAT(FIRST_NAME,LAST_NAME) as Name,SALARY from employees WHERE SALARY>=70000 AND SALARY<=80000 AND (DEPARTMENT_ID = 70 OR DEPARTMENT_ID = 80);
+Empty set (0.00 sec)
+
+mysql> SELECT CONCAT(FIRST_NAME,LAST_NAME) as Name,HIRE_DATE from employees WHERE YEAR(HIRE_DATE)=2023;
++------------------------+------------+
+| Name                   | HIRE_DATE  |
++------------------------+------------+
+| PushkarChillal         | 2023-07-01 |
+| YogeshPareek           | 2023-06-12 |
+| TalentProTechSolutions | 2023-06-05 |
+| RushikeshLokhande      | 2023-03-20 |
+| SamarthBhosale         | 2023-11-23 |
++------------------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT FIRST_NAME from employees WHERE FIRST_NAME LIKE '%b%c%';
+Empty set (0.00 sec)
+
+mysql> SELECT FIRST_NAME from employees WHERE FIRST_NAME LIKE '%c%h%';
+Empty set (0.00 sec)
+
+mysql> SELECT FIRST_NAME from employees WHERE FIRST_NAME LIKE '%c';
+Empty set (0.00 sec)
+
+mysql> SELECT FIRST_NAME from employees WHERE FIRST_NAME LIKE '%c________';
+Empty set (0.00 sec)
+
+mysql> SELECT LAST_NAME,JOB_ID from employees WHERE JOB_ID in('HR',Java Developer) AND SALARY NOT IN(70000,80000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Developer) AND SALARY NOT IN(70000,80000)' at line 1
+mysql> SELECT LAST_NAME,JOB_ID from employees WHERE JOB_ID in('HR','Java Developer') AND SALARY NOT IN(70000,80000);
++-----------+----------------+
+| LAST_NAME | JOB_ID         |
++-----------+----------------+
+| Kolhapure | HR             |
+| Sawant    | HR             |
+| Tribhuwan | Java Developer |
++-----------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT LAST_NAME FROM employees WHERE LENGTH(LAST_NAME)=9;
++-----------+
+| LAST_NAME |
++-----------+
+| Kolhapure |
+| Tribhuwan |
++-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT LAST_NAME from employees WHERE LAST_NAME LIKE '__%a';
+Empty set (0.00 sec)
+
+mysql> SELECT LAST_NAME from employees WHERE LAST_NAME LIKE '__a%';
++-----------+
+| LAST_NAME |
++-----------+
+| Bhagwat   |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT DISTINCT JOB_ID from employees;
++------------------+
+| JOB_ID           |
++------------------+
+| Trader           |
+| Developer        |
+| HR               |
+| Support          |
+| Python Developer |
+| Data Scientist   |
+| Counsellor       |
+| Git Lead         |
+| QA               |
+| Data Analyst     |
+| Recruiter        |
+| Police           |
+| Java Developer   |
+| Web Intern       |
++------------------+
+14 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT(FIRST_NAME,LAST_NAME) as Name,SALARY,SALARY*15/100 as PF from employees;
++------------------------+-----------+--------------------+
+| Name                   | SALARY    | PF                 |
++------------------------+-----------+--------------------+
+| SaurabhBhagwat         |  78000.98 | 11700.146999999999 |
+| NikhilKulkarni         |  79000.98 | 11850.146999999999 |
+| TejasKolhapure         |  80000.98 | 12000.146999999999 |
+| PushkarChillal         |  81000.98 | 12150.146999999999 |
+| ShubhamTagunde         | 822000.98 |         123300.147 |
+| AnuragSangle           | 832000.98 |         124800.147 |
+| NinadBaste             | 900000.99 |        135000.1485 |
+| AkshayGaikwad          | 910000.99 |        136500.1485 |
+| AtharvaSawant          |    920000 |             138000 |
+| YogeshPareek           |    930000 |             139500 |
+| RohitGaikwad           |    950000 |             142500 |
+| TalentProTechSolutions |    960000 |             144000 |
+| RushikeshLokhande      |    980000 |             147000 |
+| ShubhamTribhuwan       |    990000 |             148500 |
+| SamarthBhosale         |    995000 |             149250 |
++------------------------+-----------+--------------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees WHERE LAST_NAME in('Bhagwat','Tribhuwan','Kolhapure');
++-------------+------------+-----------+--------------+--------------+------------+----------------+----------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL        | PHONE_NUMBER | HIRE_DATE  | JOB_ID         | SALARY   | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+--------------+--------------+------------+----------------+----------+----------------+------------+---------------+
+|         100 | Saurabh    | Bhagwat   | sb@share.com | 9923026232   | 2022-05-20 | Trader         | 78000.98 |            345 |         12 |            67 |
+|         102 | Tejas      | Kolhapure | tk@gmail.com | 9765994343   | 2025-12-04 | HR             | 80000.98 |            347 |         14 |            69 |
+|         113 | Shubham    | Tribhuwan | st@gmail.com | 9673397462   | 2018-03-22 | Java Developer |   990000 |            358 |         25 |            79 |
++-------------+------------+-----------+--------------+--------------+------------+----------------+----------+----------------+------------+---------------+
+3 rows in set (0.00 sec)
+
+mysql>
